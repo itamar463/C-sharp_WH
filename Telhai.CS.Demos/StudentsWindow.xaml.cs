@@ -70,7 +70,6 @@ namespace Telhai.CS.Demos
         {
             Student s = new Student { Name = "NoName_" + iNoName};
             this.repo.AddStudent(s);
-            //imgStudent.Source = repo.Students[iNoName - 1].StudentImage.Source;
             iNoName++;
          
             this.listBoxStudents.ItemsSource = this.repo.Students;
@@ -138,7 +137,7 @@ namespace Telhai.CS.Demos
                     File.Copy(imagePath, currDir, true);
 
                     // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
-                    s.StudentImage = currDir;
+                    s.StudentImage = currPath;
                     this.imgStudent.Source = new BitmapImage(new Uri(currDir));
                 }
             }
