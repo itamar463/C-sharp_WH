@@ -67,6 +67,7 @@ namespace Telhai.CS.Demos
         {
             Student s = new Student { Name = "NoName_" + iNoName};
             this.repo.AddStudent(s);
+            imgStudent.Source = repo.Students[iNoName - 1].StudentImage;
             iNoName++;
          
             this.listBoxStudents.ItemsSource = this.repo.Students;

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Telhai.CS.Demos.Models
 {
@@ -13,6 +14,8 @@ namespace Telhai.CS.Demos.Models
         public string Id { get; set; }
         //public int Age { get ; set; }
         private int age =-1;
+        public BitmapImage StudentImage { get; set; }
+        public string Faculty { get; set; }
         public int Age
         {
             get { return age; }
@@ -42,6 +45,7 @@ namespace Telhai.CS.Demos.Models
             this.Name = name;
             this.Age = age;
             this.Id = Guid.NewGuid().ToString();
+            this.StudentImage = new BitmapImage(new Uri("\\img\\KoalaAI.png", UriKind.Relative));
         }
 
 
