@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Telhai.CS.Demos
     public partial class StudentsWindow : Window
     {
         IStudentsRepository repo;
-        List<String> faculties = new List<string> { "Unknown","Computer Sceince", "Biotechnology", "Psychology" };
+        List<String> faculties = new List<string> { "Unknown","Computer Sceince", "Biotechnology", "Psychology","All" };
 
 
         public StudentsWindow(IStudentsRepository repo)
@@ -170,17 +171,65 @@ namespace Telhai.CS.Demos
 
                         }*/
         }
-
         private void FacultyCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //listBoxStudents.Items.Clear();
-            foreach (Student student in repo.Students)
+            string? fac;
+            int i = this.FacultyCombo.SelectedIndex;
+            switch (i)
             {
-                if(student.Faculty == FacultyCombo.Text)
-                {
-                    listBoxStudents.Items.Add(student);
-                }
+                //--Calculte results
+                case (0):
+                    {
+                        fac = faculties[0]; //unknown
+                        break;
+                    }
+                case (1):
+                    {
+                        fac = faculties[1]; // cs
+                        break;
+                    }
+                case (2):
+                    {
+                        fac = faculties[2]; //bio
+                        break;
+                    }
+                case (3):
+                    {
+                        fac = faculties[3]; // psy
+                        break;
+                    }
+                case (4):
+                    {
+                        fac = faculties[4]; //all
+                        break;
+                    }
+                default:
+                    {
+                        fac = "error";
+                        break;
+                    }
             }
+
+
+            List<Student> lst = new List<Student>();
+            listBoxStudents.ItemsSource = repo.Students;
+            if (listBoxStudents.Items.Count > 0)
+            {
+                if(fac == "All")
+                {
+                    return;
+                }
+                foreach (Student student in listBoxStudents.Items)
+                {
+                    if(student.Faculty == fac)
+                    {
+                        lst.Add(student);
+                    }
+                }
+                listBoxStudents.ItemsSource = lst;
+                    
+            }
+
         }
     }
 }
