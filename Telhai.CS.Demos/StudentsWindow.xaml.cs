@@ -132,12 +132,13 @@ namespace Telhai.CS.Demos
                 {
                     string imagePath = openFileDialog.FileName;
                     string currPath = "\\img\\img_" + s.Name + ".png";
-                    File.Copy(imagePath, Directory.GetCurrentDirectory() + currPath, true);
-                    s.StudentImage = new BitmapImage(new Uri(currPath, UriKind.Relative));
+                    string currDir = Directory.GetCurrentDirectory() + currPath;
+                    File.Copy(imagePath, currDir, true);
+                    s.StudentImage.UriSource = new Uri(currDir, UriKind.Relative);
+                   // s.StudentImage = new BitmapImage(new Uri(currDir, UriKind.Relative));
                     imgStudent.Source = s.StudentImage;
                 }
             }
-
         }
 
         private void btnSaveAll_Click(object sender, RoutedEventArgs e)
