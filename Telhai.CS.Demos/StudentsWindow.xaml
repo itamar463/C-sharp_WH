@@ -8,26 +8,24 @@
         Title="StudentsWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"  />
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"  />
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="24*"/>
         </Grid.ColumnDefinitions>
-        <Grid Name="InnerGrid" >
+        <Grid Name="InnerGrid" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"  />
                 <RowDefinition Height="auto"  />
                 <RowDefinition Height="auto"  />
                 <RowDefinition Height="*"  />
             </Grid.RowDefinitions>
-            <DockPanel HorizontalAlignment="Stretch" Grid.Row="0">
-                <Button  DockPanel.Dock="Right" Name="btnLoadData" Width="80" Content="Load" Click="btnLoadData_Click"></Button>
-                <Button  DockPanel.Dock="Right" Name="btnBrowse" Content="..."  Click="btnBrowse_Click"></Button>
-                <TextBox  HorizontalAlignment="Stretch"  DockPanel.Dock="Left"  Name="PathLoader"   />
-            </DockPanel  >
+
+            <Button  Name="btnLoadData" Content="Load All" Click="btnLoadData_Click"></Button>
             <Button  Grid.Row="1"  Name="BtnAddStudent" Content="Add Student" Click="BtnAddStudent_Click"></Button>
             <Button Name="btnSaveAll"  Content="Save All"   Grid.Row="2" Click="btnSaveAll_Click"  ></Button>
             <ListBox Background="WhiteSmoke" Grid.Row="3"  Margin="0"    VerticalAlignment="Stretch" SelectionChanged="listBoxStudents_SelectionChanged" Name="listBoxStudents" />
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="0" >
+        <Grid Grid.Column="2" Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="3*"/>
@@ -50,11 +48,11 @@
             <Label FontSize="15" Margin="10" Grid.Row="3" Grid.Column="0"  Name="lblAge" Content="Age:"  />
             <TextBox Margin="10" Background="LightGray" Name="txtAge" Grid.Row="3" Grid.Column="1"   />
             <StackPanel  Orientation="Horizontal" Grid.Column="1" Grid.Row="4"  Margin="0,30,0,0">
-              <Button FontSize="15" HorizontalAlignment="Right" Margin="10" Height="30" Content="Update" Width="100" Name="btnSave" Grid.Column="1" Grid.Row="4" Click="btnSave_Click"  />
-              <Button FontSize="15" HorizontalAlignment="Right" Margin="10" Height="30" Content="Delete" Width="100" Name="btnRemove" Click="btnRemove_Click"  />
-              
+                <Button FontSize="15" HorizontalAlignment="Right" Margin="10" Height="30" Content="Update" Width="100" Name="btnSave" Grid.Column="1" Grid.Row="4" Click="btnSave_Click"  />
+                <Button FontSize="15" HorizontalAlignment="Right" Margin="10" Height="30" Content="Delete" Width="100" Name="btnRemove" Click="btnRemove_Click"  />
+
             </StackPanel>
         </Grid>
-            
+
     </Grid>
 </Window>

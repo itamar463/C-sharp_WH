@@ -75,6 +75,7 @@ namespace Telhai.CS.Demos
             this.listBoxStudents.ItemsSource = this.repo.Students;
             //SetSelectedByIndex(this.listBoxStudents.Items.Count-1);
             SetSelectedById(s.Id);
+            repo.SaveAllStudents();
         }
 
         private void SetSelectedById(string id)
@@ -159,26 +160,14 @@ namespace Telhai.CS.Demos
             File.WriteAllText("AppData/students.json", jsonStudentsString);*/
         }
 
-        private void btnBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                string jsonPath =   openFileDialog.FileName;
-                this.PathLoader.Text = jsonPath;
-
-
-
-            }
-                   
-        }
+        
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
         {
 
-            repo.LoadAllStudents(this.PathLoader.Text);
+            this.Title = repo.LoadAllStudents();
             this.listBoxStudents.ItemsSource = repo.Students;
-
+             
             /*            if (this.PathLoader.Text != string.Empty)
                         {
                             //1) Load Student from Text As Object

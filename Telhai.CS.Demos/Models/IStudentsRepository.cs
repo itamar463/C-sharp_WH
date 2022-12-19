@@ -11,7 +11,7 @@ namespace Telhai.CS.Demos.Models
         void AddStudent(Student student);
         void UpdateStudent(Student student);
         void RemoveStudent(string id);
-        void LoadAllStudents(String pathLoaderContent);
+        string LoadAllStudents();
          void SaveAllStudents();
         Student[] Students { get;  }
 

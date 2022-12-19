@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,13 +40,20 @@ namespace Telhai.CS.Demos.Models
 
         }
 
-        public void LoadAllStudents(String pathLoaderContent) {
-            if (pathLoaderContent != string.Empty)
+        public string LoadAllStudents() {
+            string jsonPath = "";
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    jsonPath =  openFileDialog.FileName;
+                }
+
+            if (jsonPath != string.Empty)
             {
                 //1) Load Student from Text As Object
                 //From User Selected File
                 //
-                string studentsText = File.ReadAllText(pathLoaderContent);
+                string studentsText = File.ReadAllText(jsonPath);
                 var studentsList =
                 JsonSerializer.Deserialize<Student[]>(studentsText);
                 //2)Add Objects to Repo Manager
@@ -54,7 +62,11 @@ namespace Telhai.CS.Demos.Models
                 {
                     AddStudent(item);
                 }
+                string filename = Path.GetFileName(jsonPath);
+                string[] filenameArray = filename.Split(".");
+                return filenameArray[0];
             }
+            return "Students";
         }
 
         public void SaveAllStudents() {
