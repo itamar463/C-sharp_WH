@@ -58,6 +58,7 @@ namespace Telhai.CS.Demos
                 this.txtId.Text = s.Id;
                 this.txtName.Text = s.Name;
                 this.txtAge.Text = s.Age.ToString();
+                this.imgStudent.Source = s.StudentImage;
             }
         }
 
@@ -109,7 +110,7 @@ namespace Telhai.CS.Demos
             SetSelectedByIndex(0);
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e) // "update" button
         {
             if (this.listBoxStudents.SelectedItem is Student s)
             {
@@ -125,7 +126,20 @@ namespace Telhai.CS.Demos
                 this.repo.UpdateStudent(s);
                 this.listBoxStudents.ItemsSource = repo.Students;
                 this.SetSelectedById(s.Id);
+
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string imagePath = openFileDialog.FileName;
+                    string currPath = "\\img\\img_" + s.Name + ".png";
+                    File.Copy(imagePath, "C:\\Users\\yuval\\Desktop\\C#\\C-sharp_WH\\Telhai.CS.Demos" + currPath, true);
+                    s.StudentImage = new BitmapImage(new Uri(currPath, UriKind.Relative));
+                    imgStudent.Source = s.StudentImage;
+                    this.listBoxStudents.ItemsSource = repo.Students;
+
+                }
             }
+
         }
 
         private void btnSaveAll_Click(object sender, RoutedEventArgs e)
@@ -175,8 +189,6 @@ namespace Telhai.CS.Demos
                 }
                 //3)Sync GUI LIST
                 this.listBoxStudents.ItemsSource = repo.Students;
-
-
 
             }
         }

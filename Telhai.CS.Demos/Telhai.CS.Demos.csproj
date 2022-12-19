@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\img_NoName_2.png" />
     <None Remove="img\KoalaAI.png" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="img\img_NoName_2.png" />
     <Resource Include="img\KoalaAI.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
