@@ -59,7 +59,8 @@ namespace Telhai.CS.Demos
                 this.txtId.Text = s.Id;
                 this.txtName.Text = s.Name;
                 this.txtAge.Text = s.Age.ToString();
-                this.imgStudent.Source = s.StudentImage.Source;
+                this.imgStudent.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + s.StudentImage));
+               // this.imgStudent.Source = s.StudentImage.Source;
             }
         }
 
@@ -69,7 +70,7 @@ namespace Telhai.CS.Demos
         {
             Student s = new Student { Name = "NoName_" + iNoName};
             this.repo.AddStudent(s);
-            imgStudent.Source = repo.Students[iNoName - 1].StudentImage.Source;
+            //imgStudent.Source = repo.Students[iNoName - 1].StudentImage.Source;
             iNoName++;
          
             this.listBoxStudents.ItemsSource = this.repo.Students;
@@ -136,7 +137,8 @@ namespace Telhai.CS.Demos
                     string currDir = Directory.GetCurrentDirectory() + currPath;
                     File.Copy(imagePath, currDir, true);
 
-                    s.StudentImage.Source = new BitmapImage(new Uri(currDir));
+                    // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
+                    s.StudentImage = currDir;
                     this.imgStudent.Source = new BitmapImage(new Uri(currDir));
                 }
             }
@@ -144,7 +146,8 @@ namespace Telhai.CS.Demos
 
         private void btnSaveAll_Click(object sender, RoutedEventArgs e)
         {
-            List<Student> students = repo.Students.ToList(); ;
+            repo.SaveAllStudents();
+/*            List<Student> students = repo.Students.ToList(); ;
 
             var options = new JsonSerializerOptions { WriteIndented = true };
             string jsonStudentsString = JsonSerializer.Serialize<List<Student>>(students, options);
@@ -154,7 +157,7 @@ namespace Telhai.CS.Demos
                 Directory.CreateDirectory("AppData");
             }  
            
-            File.WriteAllText("AppData/students.json", jsonStudentsString);
+            File.WriteAllText("AppData/students.json", jsonStudentsString);*/
         }
 
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
@@ -173,24 +176,28 @@ namespace Telhai.CS.Demos
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
         {
-            if (this.PathLoader.Text != string.Empty)
-            {
-                //1) Load Student from Text As Object
-                //From User Selected File
-                //
-                string studentsText = File.ReadAllText(this.PathLoader.Text);
-                var studentsList =
-                JsonSerializer.Deserialize<Student[]>(studentsText);
-                //2)Add Objects to Repo Manager
-        
-                foreach (Student item in studentsList)
-                {
-                    repo.AddStudent(item);
-                }
-                //3)Sync GUI LIST
-                this.listBoxStudents.ItemsSource = repo.Students;
 
-            }
+            repo.LoadAllStudents(this.PathLoader.Text);
+            this.listBoxStudents.ItemsSource = repo.Students;
+
+            /*            if (this.PathLoader.Text != string.Empty)
+                        {
+                            //1) Load Student from Text As Object
+                            //From User Selected File
+                            //
+                            string studentsText = File.ReadAllText(this.PathLoader.Text);
+                            var studentsList =
+                            JsonSerializer.Deserialize<Student[]>(studentsText);
+                            //2)Add Objects to Repo Manager
+
+                            foreach (Student item in studentsList)
+                            {
+                                repo.AddStudent(item);
+                            }
+                            //3)Sync GUI LIST
+                            this.listBoxStudents.ItemsSource = repo.Students;
+
+                        }*/
         }
     }
 }

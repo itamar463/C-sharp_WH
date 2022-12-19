@@ -16,7 +16,9 @@ namespace Telhai.CS.Demos.Models
         public string Id { get; set; }
         //public int Age { get ; set; }
         private int age =-1;
-        public Image StudentImage { get; set; }
+       // public Image StudentImage { get; set; }
+        public string StudentImage { get; set; }
+
         public string Faculty { get; set; }
         public int Age
         {
@@ -47,12 +49,13 @@ namespace Telhai.CS.Demos.Models
             this.Name = name;
             this.Age = age;
             this.Id = Guid.NewGuid().ToString();
-            this.StudentImage = new Image();
-            BitmapImage studentBitmapImage = new BitmapImage();
+            // this.StudentImage = new Image();
+            this.StudentImage = "\\img\\default.png";
+/*            BitmapImage studentBitmapImage = new BitmapImage();
             studentBitmapImage.BeginInit();
             studentBitmapImage.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\img\\default.png");
             studentBitmapImage.EndInit();
-            this.StudentImage.Source = studentBitmapImage;
+            this.StudentImage.Source = studentBitmapImage;*/
         }
 
 
