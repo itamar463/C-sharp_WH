@@ -50,7 +50,7 @@ namespace Telhai.CS.Demos.Models
             this.StudentImage = new Image();
             BitmapImage studentBitmapImage = new BitmapImage();
             studentBitmapImage.BeginInit();
-            studentBitmapImage.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\img\\default.jpg");
+            studentBitmapImage.UriSource = new Uri(Directory.GetCurrentDirectory() + "\\img\\default.png");
             studentBitmapImage.EndInit();
             this.StudentImage.Source = studentBitmapImage;
         }

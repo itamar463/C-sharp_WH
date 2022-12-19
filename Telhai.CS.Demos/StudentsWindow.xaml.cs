@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,7 +59,7 @@ namespace Telhai.CS.Demos
                 this.txtId.Text = s.Id;
                 this.txtName.Text = s.Name;
                 this.txtAge.Text = s.Age.ToString();
-                this.imgStudent = s.StudentImage;
+                this.imgStudent.Source = s.StudentImage.Source;
             }
         }
 
@@ -134,8 +135,9 @@ namespace Telhai.CS.Demos
                     string currPath = "\\img\\img_" + s.Name + ".png";
                     string currDir = Directory.GetCurrentDirectory() + currPath;
                     File.Copy(imagePath, currDir, true);
-                    s.StudentImage.Source = new BitmapImage(new Uri(currDir, UriKind.Relative));
-                    this.imgStudent.Source = s.StudentImage.Source;
+
+                    s.StudentImage.Source = new BitmapImage(new Uri(currDir));
+                    this.imgStudent.Source = new BitmapImage(new Uri(currDir));
                 }
             }
         }
