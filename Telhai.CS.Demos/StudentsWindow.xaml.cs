@@ -58,7 +58,7 @@ namespace Telhai.CS.Demos
                 this.txtId.Text = s.Id;
                 this.txtName.Text = s.Name;
                 this.txtAge.Text = s.Age.ToString();
-                this.imgStudent.Source = s.StudentImage;
+                this.imgStudent = s.StudentImage;
             }
         }
 
@@ -68,7 +68,7 @@ namespace Telhai.CS.Demos
         {
             Student s = new Student { Name = "NoName_" + iNoName};
             this.repo.AddStudent(s);
-            imgStudent.Source = repo.Students[iNoName - 1].StudentImage;
+            imgStudent.Source = repo.Students[iNoName - 1].StudentImage.Source;
             iNoName++;
          
             this.listBoxStudents.ItemsSource = this.repo.Students;
@@ -134,9 +134,8 @@ namespace Telhai.CS.Demos
                     string currPath = "\\img\\img_" + s.Name + ".png";
                     string currDir = Directory.GetCurrentDirectory() + currPath;
                     File.Copy(imagePath, currDir, true);
-                    s.StudentImage.UriSource = new Uri(currDir, UriKind.Relative);
-                   // s.StudentImage = new BitmapImage(new Uri(currDir, UriKind.Relative));
-                    imgStudent.Source = s.StudentImage;
+                    s.StudentImage.Source = new BitmapImage(new Uri(currDir, UriKind.Relative));
+                    this.imgStudent.Source = s.StudentImage.Source;
                 }
             }
         }
