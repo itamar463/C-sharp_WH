@@ -38,17 +38,18 @@ namespace Telhai.CS.Demos.Models
         }
 
 
-        public Student():this("",-1)
+        public Student():this("",-1,"")
         {
 
         }
 
-        public Student(string name,int age)
+        public Student(string name,int age, string fac)
         {
            
             this.Name = name;
             this.Age = age;
             this.Id = Guid.NewGuid().ToString();
+            this.Faculty = fac;
             // this.StudentImage = new Image();
             this.StudentImage = "\\img\\default.png";
 /*            BitmapImage studentBitmapImage = new BitmapImage();

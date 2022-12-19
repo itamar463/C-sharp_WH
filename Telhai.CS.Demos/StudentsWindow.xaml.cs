@@ -59,6 +59,7 @@ namespace Telhai.CS.Demos
                 this.txtId.Text = s.Id;
                 this.txtName.Text = s.Name;
                 this.txtAge.Text = s.Age.ToString();
+                this.txtFac.Text = s.Faculty;
                 this.imgStudent.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + s.StudentImage));
                // this.imgStudent.Source = s.StudentImage.Source;
             }
@@ -110,56 +111,47 @@ namespace Telhai.CS.Demos
                 
             this.listBoxStudents.ItemsSource = repo.Students;
             SetSelectedByIndex(0);
+            repo.SaveAllStudents();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e) // "update" button
         {
             if (this.listBoxStudents.SelectedItem is Student s)
             {
-                s.Name = txtName.Text;
-                int convertedAge;
-                bool isOk = int.TryParse(txtAge.Text, out convertedAge);
-                if (isOk)
+                if (s.Name != txtName.Text || s.Faculty != txtFac.Text || s.Age.ToString() != txtAge.Text)
                 {
-                    s.Age = convertedAge;
-                }
-                s.Id = this.txtId.Text;
+                    s.Name = txtName.Text;
+                    s.Faculty = txtFac.Text;
+                    int convertedAge;
+                    bool isOk = int.TryParse(txtAge.Text, out convertedAge);
+                    if (isOk)
+                    {
+                        s.Age = convertedAge;
+                    }
+                    s.Id = this.txtId.Text;
 
-                this.repo.UpdateStudent(s);
-                this.listBoxStudents.ItemsSource = repo.Students;
-                this.SetSelectedById(s.Id);
+                    this.repo.UpdateStudent(s);
+                    this.listBoxStudents.ItemsSource = repo.Students;
+                    this.SetSelectedById(s.Id);
 
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    string imagePath = openFileDialog.FileName;
-                    string currPath = "\\img\\img_" + s.Name + ".png";
-                    string currDir = Directory.GetCurrentDirectory() + currPath;
-                    File.Copy(imagePath, currDir, true);
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        string imagePath = openFileDialog.FileName;
+                        string currPath = "\\img\\img_" + s.Name + ".png";
+                        string currDir = Directory.GetCurrentDirectory() + currPath;
+                        File.Copy(imagePath, currDir, true);
 
-                    // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
-                    s.StudentImage = currPath;
-                    this.imgStudent.Source = new BitmapImage(new Uri(currDir));
+                        // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
+                        s.StudentImage = currPath;
+                        this.imgStudent.Source = new BitmapImage(new Uri(currDir));
+                    }
+                    repo.SaveAllStudents();
                 }
             }
         }
 
-        private void btnSaveAll_Click(object sender, RoutedEventArgs e)
-        {
-            repo.SaveAllStudents();
-/*            List<Student> students = repo.Students.ToList(); ;
-
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonStudentsString = JsonSerializer.Serialize<List<Student>>(students, options);
-
-            if (!Directory.Exists("AppData"))
-            { 
-                Directory.CreateDirectory("AppData");
-            }  
-           
-            File.WriteAllText("AppData/students.json", jsonStudentsString);*/
-        }
-
+        
         
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
