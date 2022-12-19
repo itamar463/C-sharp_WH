@@ -25,6 +25,8 @@ namespace Telhai.CS.Demos
     public partial class StudentsWindow : Window
     {
         IStudentsRepository repo;
+        List<String> faculties = new List<string> { "Unknown","Computer Sceince", "Biotechnology", "Psychology" };
+
 
         public StudentsWindow(IStudentsRepository repo)
         {
@@ -34,22 +36,11 @@ namespace Telhai.CS.Demos
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //-Initializer
-            //Student s1 = new Student { Name = "Moshe", Age = 15 };
-            //repo.AddStudent(s1);
-            ////-Initializer
-            //Student s2 = new Student { Name = "David", Age = 21 };
-            //repo.AddStudent(s2);
-
-            ////-Constractor
-            //Student s3 = new Student(name: "Yossi", age: 27);
-            //repo.AddStudent(s3);
-
-            ////-Get Current Data from student repo
-            ////-each List item is object of student
-            ////-each list item will display the toString of the bounded object (ToString of Student)
-            //this.listBoxStudents.ItemsSource = repo.Students;
-
+            for (int i = 0; i < faculties.Count; i++)
+            {
+                txtFac.Items.Add(faculties[i]);
+                FacultyCombo.Items.Add(faculties[i]);
+            }
         }
 
         private void listBoxStudents_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,7 +60,7 @@ namespace Telhai.CS.Demos
         int iNoName = 1;
         private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            Student s = new Student { Name = "NoName_" + iNoName};
+            Student s = new Student { Name = "NoName_" + iNoName,Faculty = faculties[0] };
             this.repo.AddStudent(s);
             iNoName++;
          
@@ -178,6 +169,18 @@ namespace Telhai.CS.Demos
                             this.listBoxStudents.ItemsSource = repo.Students;
 
                         }*/
+        }
+
+        private void FacultyCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //listBoxStudents.Items.Clear();
+            foreach (Student student in repo.Students)
+            {
+                if(student.Faculty == FacultyCombo.Text)
+                {
+                    listBoxStudents.Items.Add(student);
+                }
+            }
         }
     }
 }
