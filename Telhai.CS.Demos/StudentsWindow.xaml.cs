@@ -132,7 +132,7 @@ namespace Telhai.CS.Demos
                 {
                     string imagePath = openFileDialog.FileName;
                     string currPath = "\\img\\img_" + s.Name + ".png";
-                    File.Copy(imagePath, "C:\\Users\\yuval\\Desktop\\C#\\C-sharp_WH\\Telhai.CS.Demos" + currPath, true);
+                    File.Copy(imagePath, Directory.GetCurrentDirectory() + currPath, true);
                     s.StudentImage = new BitmapImage(new Uri(currPath, UriKind.Relative));
                     imgStudent.Source = s.StudentImage;
                 }
