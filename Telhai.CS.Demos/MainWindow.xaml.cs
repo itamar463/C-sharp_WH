@@ -51,7 +51,7 @@ namespace Telhai.CS.Demos
         private void btn2_Click(object sender, RoutedEventArgs e)
         {
 
-            StudentsWindow s = new StudentsWindow(new StudentsRepository());
+            StudentsWindow s = new StudentsWindow(new StudentsDictionaryRepository());
             s.Show();
         }
 
