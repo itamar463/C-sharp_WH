@@ -54,6 +54,7 @@
                 <Button FontSize="15" HorizontalAlignment="Right" Margin="10" Height="30" Content="Delete" Width="100" Name="btnRemove" Click="btnRemove_Click"  />
 
             </StackPanel>
+            <Button Grid.Column="1" Content="Update Photo" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 45 0" Name="UpdatePhotoBTN" Click="UpdatePhotoBTN_Click"/>
         </Grid>
 
     </Grid>

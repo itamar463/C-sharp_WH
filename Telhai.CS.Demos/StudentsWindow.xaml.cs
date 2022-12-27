@@ -26,7 +26,7 @@ namespace Telhai.CS.Demos
     public partial class StudentsWindow : Window
     {
         IStudentsRepository repo;
-        List<String> faculties = new List<string> { "Unknown","Computer Sceince", "Biotechnology", "Psychology","All" };
+        List<String> faculties = new List<string> { "Unknown", "Computer Sceince", "Biotechnology", "Psychology", "All" };
 
 
         public StudentsWindow(IStudentsRepository repo)
@@ -53,7 +53,7 @@ namespace Telhai.CS.Demos
                 this.txtAge.Text = s.Age.ToString();
                 this.txtFac.Text = s.Faculty;
                 this.imgStudent.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + s.StudentImage));
-               // this.imgStudent.Source = s.StudentImage.Source;
+                // this.imgStudent.Source = s.StudentImage.Source;
             }
         }
 
@@ -61,10 +61,10 @@ namespace Telhai.CS.Demos
         int iNoName = 1;
         private void BtnAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            Student s = new Student { Name = "NoName_" + iNoName,Faculty = faculties[0] };
+            Student s = new Student { Name = "NoName_" + iNoName, Faculty = faculties[0] };
             this.repo.AddStudent(s);
             iNoName++;
-         
+
             this.listBoxStudents.ItemsSource = this.repo.Students;
             //SetSelectedByIndex(this.listBoxStudents.Items.Count-1);
             SetSelectedById(s.Id);
@@ -77,18 +77,18 @@ namespace Telhai.CS.Demos
             {
 
                 Student? s = listBoxStudents.Items[i] as Student;
-                if (s!=null)
+                if (s != null)
                 {
-                    if (s.Id==id)
+                    if (s.Id == id)
                         this.listBoxStudents.SelectedItem = s;
                 }
-            
+
             }
         }
 
         private void SetSelectedByIndex(int index)
         {
-            if (index>=0 && index < this.listBoxStudents.Items.Count)
+            if (index >= 0 && index < this.listBoxStudents.Items.Count)
             {
                 this.listBoxStudents.SelectedIndex = index;
             }
@@ -96,11 +96,11 @@ namespace Telhai.CS.Demos
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (this.listBoxStudents.SelectedItem is Student s )
+            if (this.listBoxStudents.SelectedItem is Student s)
             {
                 repo.RemoveStudent(s.Id);
             }
-                
+
             this.listBoxStudents.ItemsSource = repo.Students;
             SetSelectedByIndex(0);
             repo.SaveAllStudents();
@@ -128,50 +128,16 @@ namespace Telhai.CS.Demos
                     this.listBoxStudents.ItemsSource = repo.Students;
                     this.SetSelectedById(s.Id);
                 }
-                    OpenFileDialog openFileDialog = new OpenFileDialog();
-                    if (openFileDialog.ShowDialog() == true)
-                    {
-                    isChange = true;
-                        string imagePath = openFileDialog.FileName;
-                        string currPath = "\\img\\img_" + s.Name + ".png";
-                        string currDir = Directory.GetCurrentDirectory() + currPath;
-                        File.Copy(imagePath, currDir, true);
-
-                        // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
-                        s.StudentImage = currPath;
-                        this.imgStudent.Source = new BitmapImage(new Uri(currDir));
-                    }
-                }
-            if(isChange) repo.SaveAllStudents();
+            }
+            if (isChange) repo.SaveAllStudents();
         }
-
-        
-        
 
         private void btnLoadData_Click(object sender, RoutedEventArgs e)
         {
 
             this.Title = repo.LoadAllStudents();
             this.listBoxStudents.ItemsSource = repo.Students;
-             
-            /*            if (this.PathLoader.Text != string.Empty)
-                        {
-                            //1) Load Student from Text As Object
-                            //From User Selected File
-                            //
-                            string studentsText = File.ReadAllText(this.PathLoader.Text);
-                            var studentsList =
-                            JsonSerializer.Deserialize<Student[]>(studentsText);
-                            //2)Add Objects to Repo Manager
 
-                            foreach (Student item in studentsList)
-                            {
-                                repo.AddStudent(item);
-                            }
-                            //3)Sync GUI LIST
-                            this.listBoxStudents.ItemsSource = repo.Students;
-
-                        }*/
         }
         private void FacultyCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -217,21 +183,42 @@ namespace Telhai.CS.Demos
             listBoxStudents.ItemsSource = repo.Students;
             if (listBoxStudents.Items.Count > 0)
             {
-                if(fac == "All")
+                if (fac == "All")
                 {
                     return;
                 }
                 foreach (Student student in listBoxStudents.Items)
                 {
-                    if(student.Faculty == fac)
+                    if (student.Faculty == fac)
                     {
                         lst.Add(student);
                     }
                 }
                 listBoxStudents.ItemsSource = lst;
-                    
+
             }
 
+        }
+
+
+        private void UpdatePhotoBTN_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.listBoxStudents.SelectedItem is Student s)
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string imagePath = openFileDialog.FileName;
+                    string currPath = "\\img\\img_" + s.Name + ".png";
+                    string currDir = Directory.GetCurrentDirectory() + currPath;
+                    File.Copy(imagePath, currDir, true);
+
+                    // s.StudentImage.Source = new BitmapImage(new Uri(currDir));
+                    s.StudentImage = currPath;
+                    this.imgStudent.Source = new BitmapImage(new Uri(currDir));
+                }
+                repo.SaveAllStudents();
+            }
         }
     }
 }
