@@ -108,10 +108,12 @@ namespace Telhai.CS.Demos
 
         private void btnSave_Click(object sender, RoutedEventArgs e) // "update" button
         {
+            bool isChange = false;
             if (this.listBoxStudents.SelectedItem is Student s)
             {
                 if (s.Name != txtName.Text || s.Faculty != txtFac.Text || s.Age.ToString() != txtAge.Text)
                 {
+                    isChange = true;
                     s.Name = txtName.Text;
                     s.Faculty = txtFac.Text;
                     int convertedAge;
@@ -125,10 +127,11 @@ namespace Telhai.CS.Demos
                     this.repo.UpdateStudent(s);
                     this.listBoxStudents.ItemsSource = repo.Students;
                     this.SetSelectedById(s.Id);
-
+                }
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     if (openFileDialog.ShowDialog() == true)
                     {
+                    isChange = true;
                         string imagePath = openFileDialog.FileName;
                         string currPath = "\\img\\img_" + s.Name + ".png";
                         string currDir = Directory.GetCurrentDirectory() + currPath;
@@ -138,9 +141,8 @@ namespace Telhai.CS.Demos
                         s.StudentImage = currPath;
                         this.imgStudent.Source = new BitmapImage(new Uri(currDir));
                     }
-                    repo.SaveAllStudents();
                 }
-            }
+            if(isChange) repo.SaveAllStudents();
         }
 
         
@@ -200,7 +202,7 @@ namespace Telhai.CS.Demos
                     }
                 case (4):
                     {
-                        fac = faculties[4]; //all
+                        fac = faculties[4];
                         break;
                     }
                 default:
