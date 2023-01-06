@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telhai.CS.Demos", "Telhai.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telhai.CS.Logging", "Telhai.CS.Logger\Telhai.CS.Logging.csproj", "{847B0CD5-B05B-4B80-A0DF-6C9650198F83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelHai.CS.SereverAPI", "TelHai.CS.SereverAPI\TelHai.CS.SereverAPI.csproj", "{72357B62-2FDA-401E-8B89-66DC827320D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{847B0CD5-B05B-4B80-A0DF-6C9650198F83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{847B0CD5-B05B-4B80-A0DF-6C9650198F83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{847B0CD5-B05B-4B80-A0DF-6C9650198F83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72357B62-2FDA-401E-8B89-66DC827320D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72357B62-2FDA-401E-8B89-66DC827320D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72357B62-2FDA-401E-8B89-66DC827320D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72357B62-2FDA-401E-8B89-66DC827320D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

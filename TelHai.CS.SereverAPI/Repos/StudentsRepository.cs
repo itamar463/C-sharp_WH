@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+using Telhai.CS.ServerAPI.Models;
 
-namespace Telhai.CS.Demos.Models
+namespace Telhai.CS.ServerAPI.Repos
 {
     public class StudentsRepository : IStudentsRepository
     {
@@ -42,32 +42,33 @@ namespace Telhai.CS.Demos.Models
         }
 
         public string LoadAllStudents() {
-            
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    jsonPath =  openFileDialog.FileName;
-                }
 
-            if (jsonPath != string.Empty)
-            {
-                //1) Load Student from Text As Object
-                //From User Selected File
-                //
-                string studentsText = File.ReadAllText(jsonPath);
-                var studentsList =
-                JsonSerializer.Deserialize<Student[]>(studentsText);
-                //2)Add Objects to Repo Manager
+            //OpenFileDialog openFileDialog = new OpenFileDialog();
+            //    if (openFileDialog.ShowDialog() == true)
+            //    {
+            //        jsonPath =  openFileDialog.FileName;
+            //    }
 
-                foreach (Student item in studentsList)
-                {
-                    AddStudent(item);
-                }
-                string filename = Path.GetFileName(jsonPath);
-                string[] filenameArray = filename.Split(".");
-                return filenameArray[0];
-            }
-            return "Students";
+            //if (jsonPath != string.Empty)
+            //{
+            //    //1) Load Student from Text As Object
+            //    //From User Selected File
+            //    //
+            //    string studentsText = File.ReadAllText(jsonPath);
+            //    var studentsList =
+            //    JsonSerializer.Deserialize<Student[]>(studentsText);
+            //    //2)Add Objects to Repo Manager
+
+            //    foreach (Student item in studentsList)
+            //    {
+            //        AddStudent(item);
+            //    }
+            //    string filename = Path.GetFileName(jsonPath);
+            //    string[] filenameArray = filename.Split(".");
+            //    return filenameArray[0];
+            //}
+            //return "Students";
+            return "";
         }
 
         public void SaveAllStudents() {

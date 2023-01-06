@@ -46,7 +46,7 @@
             <TextBox Margin="10"  Background="LightGray" Name="txtName" Grid.Row="2" Grid.Column="1"   />
             <Label FontSize="15" Margin="10" Grid.Row="3" Grid.Column="0"  Name="lblAge" Content="Age:"  />
             <TextBox Margin="10" Background="LightGray" Name="txtAge" Grid.Row="3" Grid.Column="1"   />
-            <ComboBox Margin="10"  Background="LightGray" Name="txtFac" Grid.Row="4" Grid.Column="1"   />
+            <TextBox Margin="10"  Background="LightGray" Name="txtFac" Grid.Row="4" Grid.Column="1"   />
             <Label FontSize="15" Margin="10" Grid.Row="4" Grid.Column="0"  Name="lblFac" Content="Faculty:"  />
 
             <StackPanel  Orientation="Horizontal" Grid.Column="1" Grid.Row="5"  Margin="0,30,0,0">

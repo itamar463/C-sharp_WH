@@ -21,6 +21,7 @@
             <Button Name="btn1" Margin="8,4,8,8" Content="Calc Window"  FontSize="25" Click="btn1_Click"   />
             <Button Name="btn2" Margin="8,0,8,8" Content="Students Window" FontSize="25" Click="btn2_Click"  />
             <Button Name="btn3" Margin="8,0,8,8" Content="JsonDemos Window" FontSize="25" Click="btn3_Click"  />
+            <Button Name="btn4" Margin="8,0,8,8" Content="Linq Window" FontSize="25" Click="btn4_Click" />
         </StackPanel>
         <ListBox  SelectionChanged="listElem_SelectionChanged" FontSize="20" Name="listElem" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15" />
 

@@ -11,6 +11,7 @@ namespace Telhai.CS.Demos.Models
 {
     internal class StudentsDictionaryRepository : IStudentsRepository
     {
+        private string? jsonPath;
         private Dictionary<string,Student> _students;
         public StudentsDictionaryRepository()
         {
@@ -25,7 +26,11 @@ namespace Telhai.CS.Demos.Models
 
         public void AddStudent(Student student)
         {
-            this._students.Add(student.Id,student);
+            if (!_students.ContainsKey(student.Id))
+            {
+                this._students.Add(student.Id, student);
+            }
+                
         }
 
         public void UpdateStudent(Student student)
@@ -43,7 +48,6 @@ namespace Telhai.CS.Demos.Models
 
         public string LoadAllStudents()
         {
-            string jsonPath = "";
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {

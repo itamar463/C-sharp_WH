@@ -8,21 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="img\KoalaAI.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Telhai.CS.Logger\Telhai.CS.Logging.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="img\KoalaAI.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
 </Project>
